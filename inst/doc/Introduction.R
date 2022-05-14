@@ -1,26 +1,26 @@
-## ----echo = FALSE--------------------------------------------------------
+## ----echo = FALSE-------------------------------------------------------------
 knitr::opts_chunk$set( fig.width =  183 * 0.0393701,  # nature's two col width
                        message = FALSE,
                        warning = FALSE)
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 references <- data.frame(Dataset = c("lisiecki2005", "spratt2016"),
                          Source = c("Lisiecki, L.E. and M.E. Raymo. 2005. A Pliocene-Pleistocene stack of 57 globally distributed benthic D18O records. Paleoceanography, Vol. 20, PA1003, <https://doi.org/10.1029/2004PA001071>",
                                     "Spratt, Rachel M. and Lorraine E. Lisiecki 2016. A Late Pleistocene sea level stack. Climate of the Past. Vol. 12, 1079-1092, <https://doi.org/10.5194/cp-12-1-2016>"))
 
 knitr::kable(references)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(gsloid)
 str(lisiecki2005)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 str(spratt2016)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 str(LR04_MISboundaries)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(ggplot2)
 
 
@@ -33,7 +33,7 @@ ggplot(lisiecki2005,
   scale_y_reverse(name = bquote(delta^18*O)) +
   theme_bw()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot(spratt2016, 
        aes(age_calkaBP,
            SeaLev_shortPC1)) +
@@ -43,7 +43,7 @@ ggplot(spratt2016,
   scale_y_continuous(name = "Sea Level, meters above present day") +
   theme_bw()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # subset the MIS data for the last 250 ka years
 mis_last_250ka <- LR04_MISboundaries[LR04_MISboundaries$LR04_Age_ka_start <= 250, ]
 
@@ -67,7 +67,7 @@ ggplot() +
   scale_y_reverse(name = bquote(delta^18*O)) +
   theme_bw()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot() +
   geom_segment(data = mis_last_250ka, # add MIS lines
                aes(x =    LR04_Age_ka_end,
@@ -91,7 +91,7 @@ ggplot() +
   scale_y_reverse(name = bquote(delta^18*O)) +
   theme_bw()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot() +
   annotate("rect", 
            xmin = mis_last_250ka$LR04_Age_ka_end, 
@@ -116,7 +116,7 @@ ggplot() +
   scale_y_reverse(name = bquote(delta^18*O)) +
   theme_bw()
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot() +
   annotate("rect", 
            xmin = mis_last_250ka$LR04_Age_ka_end , 
